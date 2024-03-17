@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page title</title>
+    <style>
+      body, html { margin: 0; padding: 0; height: 100%; overflow: hidden}
+    </style>
+  </head>
+  <body>
+    <iframe
+      id="signupForm"
+      src="https://formless.ai/c/iCbW3Pk6kumY"
+      class="formless-embed"
+      width="100%"
+      height="100%"
+      allow="microphone"
+      style="border: 0; display: block"
+    ></iframe>
+    <script src="https://embed.formless.ai/embed.js" async></script>
+    <script>
+      // Function to extract query parameters from the URL
+      function getQueryParam(param) {
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        return urlParams.get(param);
+      }
+
+      // Extract the 'email' query parameter
+      var email = getQueryParam('email');
+      var whatsapp = getQueryParam('whatsapp');
+
+      // Ensure the 'name' parameter exists
+      if (email) {
+        var iframe = document.getElementById('signupForm');
+        var originalSrc = iframe.src;
+        // Append the 'email' query parameter to the iframe's src
+        iframe.src = originalSrc + "#email_address=" + encodeURIComponent(email);
+      }
+
+      if (whatsapp) {
+        var iframe = document.getElementById('signupForm');
+        var originalSrc = iframe.src;
+        // Append the 'whatsapp' query parameter to the iframe's src
+        iframe.src = originalSrc + "#whatsapp_phone_number=" + encodeURIComponent(whatsapp);
+      }
+
+    </script>
+
+  </body>
+</html>
+
+
