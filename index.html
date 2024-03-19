@@ -33,14 +33,19 @@
       var whatsapp = getQueryParam('whatsapp');
       var name = getQueryParam('name');
 
+      console.log("Name: " + name)
+      console.log("Email: " + email)
+      console.log("Whatsapp: " + whatsapp)
+
+      var queryParamString = "";
 
       if (name && name!=="null") {
-        
         console.log("Name: " + name)
         var iframe = document.getElementById('signupForm');
         var originalSrc = iframe.src;
         // Append the 'name' query parameter to the iframe's src
-        iframe.src = originalSrc + "#name_valid_email=" + encodeURIComponent(name);
+        queryParamString += "name_valid_email=" + encodeURIComponent(name);
+        //iframe.src = originalSrc + "#name_valid_email=" + encodeURIComponent(name);
       }
 
       // Ensure the 'name' parameter exists
@@ -49,7 +54,14 @@
         var iframe = document.getElementById('signupForm');
         var originalSrc = iframe.src;
         // Append the 'email' query parameter to the iframe's src
-        iframe.src = originalSrc + "#email_address=" + encodeURIComponent(email);
+        if(queryParamString.length > 0){
+          queryParamString += "&";
+          queryParamString += "email_address=" + encodeURIComponent(email);
+        }
+        else{
+          queryParamString += "email_address=" + encodeURIComponent(email);
+        }
+        //iframe.src = originalSrc + "#email_address=" + encodeURIComponent(email);
       }
 
       if (whatsapp) {
@@ -57,10 +69,20 @@
         var iframe = document.getElementById('signupForm');
         var originalSrc = iframe.src;
         // Append the 'whatsapp' query parameter to the iframe's src
-        iframe.src = originalSrc + "#whatsapp_phone_number=" + encodeURIComponent(whatsapp);
+        if(queryParamString.length > 0){
+          queryParamString += "&";
+          queryParamString += "whatsapp_phone_number=" + encodeURIComponent(whatsapp);
+        }
+        else{
+          queryParamString += "whatsapp_phone_number=" + encodeURIComponent(whatsapp);
+        }
+        //iframe.src = originalSrc + "#whatsapp_phone_number=" + encodeURIComponent(whatsapp);
       }
-
-
+      
+      var iframe = document.getElementById('signupForm');
+      var originalSrc = iframe.src;
+      console.log(originalSrc + "#" + queryParamString);
+      iframe.src = originalSrc + "#" + queryParamString;
 
     </script>
 
