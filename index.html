@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -23,70 +22,38 @@
     <script>
       // Function to extract query parameters from the URL
       function getQueryParam(param) {
-        var queryString = window.location.search;
-        var urlParams = new URLSearchParams(queryString);
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
         return urlParams.get(param);
       }
 
-      // Extract the 'email' query parameter
-      var email = getQueryParam('email');
-      var whatsapp = getQueryParam('whatsapp');
-      var name = getQueryParam('name');
+      const iframe = document.getElementById('signupForm');
+      const originalSrc = iframe.src;
+      const queryParamString = [];
 
-      console.log("Name: " + name)
-      console.log("Email: " + email)
-      console.log("Whatsapp: " + whatsapp)
+      // Extract the query parameters
+      const email = getQueryParam('email');
+      const whatsapp = getQueryParam('whatsapp');
+      const name = getQueryParam('name');
 
-      var queryParamString = "";
-
-      if (name && name!=="null") {
-        console.log("Name: " + name)
-        var iframe = document.getElementById('signupForm');
-        var originalSrc = iframe.src;
-        // Append the 'name' query parameter to the iframe's src
-        queryParamString += "name_valid_email=" + encodeURIComponent(name);
-        //iframe.src = originalSrc + "#name_valid_email=" + encodeURIComponent(name);
+      if (name && name !== "null") {
+        console.log("Name: " + name);
+        queryParamString.push("name_valid_email=" + encodeURIComponent(name));
       }
 
-      // Ensure the 'name' parameter exists
       if (email) {
-        console.log("Email: " + email)
-        var iframe = document.getElementById('signupForm');
-        var originalSrc = iframe.src;
-        // Append the 'email' query parameter to the iframe's src
-        if(queryParamString.length > 0){
-          queryParamString += "&";
-          queryParamString += "email_address=" + encodeURIComponent(email);
-        }
-        else{
-          queryParamString += "email_address=" + encodeURIComponent(email);
-        }
-        //iframe.src = originalSrc + "#email_address=" + encodeURIComponent(email);
+        console.log("Email: " + email);
+        queryParamString.push("email_address=" + encodeURIComponent(email));
       }
 
       if (whatsapp) {
-        console.log("Whatsapp: " + whatsapp)
-        var iframe = document.getElementById('signupForm');
-        var originalSrc = iframe.src;
-        // Append the 'whatsapp' query parameter to the iframe's src
-        if(queryParamString.length > 0){
-          queryParamString += "&";
-          queryParamString += "whatsapp_phone_number=" + encodeURIComponent(whatsapp);
-        }
-        else{
-          queryParamString += "whatsapp_phone_number=" + encodeURIComponent(whatsapp);
-        }
-        //iframe.src = originalSrc + "#whatsapp_phone_number=" + encodeURIComponent(whatsapp);
+        console.log("Whatsapp: " + whatsapp);
+        queryParamString.push("whatsapp_phone_number=" + encodeURIComponent(whatsapp));
       }
-      
-      var iframe = document.getElementById('signupForm');
-      var originalSrc = iframe.src;
-      console.log(originalSrc + "#" + queryParamString);
-      iframe.src = originalSrc + "#" + queryParamString;
 
+      const queryParams = queryParamString.join("&");
+      console.log(originalSrc + "#" + queryParams);
+      iframe.src = originalSrc + "#" + queryParams;
     </script>
-
   </body>
 </html>
-
-
