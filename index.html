@@ -33,8 +33,19 @@
       var whatsapp = getQueryParam('whatsapp');
       var name = getQueryParam('name');
 
+
+      if (name && name!=="null") {
+        
+        console.log("Name: " + name)
+        var iframe = document.getElementById('signupForm');
+        var originalSrc = iframe.src;
+        // Append the 'name' query parameter to the iframe's src
+        iframe.src = originalSrc + "#name_valid_email=" + encodeURIComponent(name);
+      }
+
       // Ensure the 'name' parameter exists
       if (email) {
+        console.log("Email: " + email)
         var iframe = document.getElementById('signupForm');
         var originalSrc = iframe.src;
         // Append the 'email' query parameter to the iframe's src
@@ -42,18 +53,13 @@
       }
 
       if (whatsapp) {
+        console.log("Whatsapp: " + whatsapp)
         var iframe = document.getElementById('signupForm');
         var originalSrc = iframe.src;
         // Append the 'whatsapp' query parameter to the iframe's src
         iframe.src = originalSrc + "#whatsapp_phone_number=" + encodeURIComponent(whatsapp);
       }
 
-      if (name) {
-        var iframe = document.getElementById('signupForm');
-        var originalSrc = iframe.src;
-        // Append the 'name' query parameter to the iframe's src
-        iframe.src = originalSrc + "#name_valid_email=" + encodeURIComponent(name);
-      }
 
 
     </script>
